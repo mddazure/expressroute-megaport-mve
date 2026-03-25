@@ -85,9 +85,9 @@ This will provision the MVE and the VXC. It will take a few minutes for all serv
 In the Azure portal, the Provider Status of the ExpressRoute circuit will change to Provisioned.
 
 ## Configure Private Peering
-Go back to the ExpressRoute circuit in the Azure portal. The Provisioning Status will now be Provisioned, and the Private Peering can be enabled. Click on Peerings under Settings and then click Azure private.
+Go back to the ExpressRoute circuit in the Azure portal. The Provider Status will now be Provisioned, and the Private Peering can be enabled. Click on Peerings under Settings and then click Azure private.
 
-Enter the Peer ASN and Primary and Secondary subnets. Under VLAN ID enter the **same number configured under Azure Peering VLAN in the Primary and Secondary VXC configurations** in the Megaport portal.
+Enter the Peer ASN and Primary and Secondary subnets. Under VLAN ID enter the **same number as configured under Azure Peering VLAN in the Primary and Secondary VXC configurations** in the Megaport portal.
 
 ![image](/images/private-peering.png)
 

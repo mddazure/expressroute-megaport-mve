@@ -1,4 +1,4 @@
-# Connecting an ExpressRoute circuit to Megaport MVE Cisco8000v
+# Connecting an ExpressRoute circuit to Megaport MVE Cisco 8000v
 
 Megaport is an ExpressRoute partner in many [locations](https://learn.microsoft.com/en-us/azure/expressroute/expressroute-locations?tabs=america%2Cj-m%2Cus-government-cloud%2Ca-C#global-commercial-azure). The [Megaport Cloud Router (MCR)](https://docs.megaport.com/mcr/) allows ExpressRoute customers to connect leased lines to their onpremise locations, and to connect other Cloud Providers. MCR is easy to set up and operate, it even automatically configures the ExpressRoute Private Peering on both the Megaport and Azure sides, but it does not have a command line interface and does not permit advanced configuration.
 

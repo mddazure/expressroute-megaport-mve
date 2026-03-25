@@ -60,7 +60,7 @@ Click +Connection in the MVE box to add a VXC to the ExpressRoute Circuit.
 
 On the next screen:
 - Give the connection a name.
-- Leave the Rate Limit as proposed, this is set to the bandwdith of the circuit.
+- Leave the Rate Limit as proposed, this is set to the bandwidth of the circuit.
 - At A-end vNIC, select vNIC-1 (do not leave this at vNIC-0!).
 - At Preferred A-End VLAN, turn off Untag and enter a VLAN number. This will be used to set the subinterface in the MVE configuration later.
 Scroll down to Azure peering VLAN.

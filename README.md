@@ -6,16 +6,16 @@ For advanced scenario's, [Megaport Virtual Edge (MVE)](https://docs.megaport.com
 
 This post describes how to connect ExpressRoute to MVE running a Cisco 8000v NVA. 
 
-![image](/expressroute-megaport-mve.png)
+![image](/images/expressroute-megaport-mve.png)
 
 ## Create the Expressroute Circuit 
 In the Azure portal, create an  ExpressRoute circuit with Standard Resilliency in a Peering location where Megaport is available.
 
-![image](/create-exr-cct.png)
+![image](/images/create-exr-cct.png)
 
 When the cicruit deployment completes, copy the Service key.
 
-![image](/s-key.png)
+![image](/images/s-key.png)
 
 ## Create MVE and ExpressRoute connections
 Log in to the [Megaport management portal](https://portal.megaport.com/), go to Services and click Create MVE.
@@ -24,7 +24,7 @@ On the next screen:
 - Select the Location where the MVE is to be deployed - use the ExpressRoute peering location.
 - Select the MVE size.
 
-![image](/mve-configure-service.png)
+![image](/images/mve-configure-service.png)
 
 On the following screen:
 - Select Autonomous under Appliance Mode.
@@ -32,7 +32,7 @@ On the following screen:
 - Under Virtual Interfaces (vNICs), add vNICs as needed. One ExpressRoute circuit requires 2 vNICs, one for each path.
 vNIC0 will be used to connect a Megaport Internet VXC for SShh access to the device.
 
-![image](/mve-configure-product.png)
+![image](/images/mve-configure-product.png)
 
 On the following screen, give the MVE a name under Finalize Details in the left bar, verify the Summary, and and click Add MVE.
 
@@ -56,7 +56,7 @@ Click +Connection in the MVE box to add a VXC to the ExpressRoute Circuit.
 - Paste in the circuit's Service Key and select Port for the Primary path.
 - Click Next.
 
-![image](/vxc-exr-primary.png)
+![image](/images/vxc-exr-primary.png)
 
 On the next screen:
 - Give the connection a name.
@@ -70,11 +70,11 @@ Scroll down to Azure peering VLAN.
 
 Verify the configuration summary and click Add VXC.
 
-![image](/megaport-conn-config-pri.png)
+![image](/images/megaport-conn-config-pri.png)
 
 Repeat the process to add the Secondary path, terminating on vNIC-2. Enter a different VLAN ID for Preferred A-End VLAN. Enter the same VLAN ID that will be used in the Private Peering under Azure peering VLAN.
 
-![image](/megaport-conn-config-sec.png)
+![image](/images/megaport-conn-config-sec.png)
 
 When the second ExpressRoute VXC is configured, click Review Order in the right hand bar of the Services screen.
 
@@ -89,4 +89,4 @@ Go back to the ExpressRoute circuit in the Azure portal. The Provisioning Status
 
 Enter the Peer ASN and Primary and Secondary subnets. Under VLAN ID enter the **same number configured under Azure Peering VLAN in the Primary and Secondary VXC configurations** in the Megaport portal.
 
-![image](/private-peering.png)
+![image](/images/private-peering.png)

@@ -90,3 +90,65 @@ Go back to the ExpressRoute circuit in the Azure portal. The Provisioning Status
 Enter the Peer ASN and Primary and Secondary subnets. Under VLAN ID enter the **same number configured under Azure Peering VLAN in the Primary and Secondary VXC configurations** in the Megaport portal.
 
 ![image](/images/private-peering.png)
+
+## Configure Cisco IOS
+Establish an SSH session to the MVE. Use the public ip address from the internet vxc, and the private key that belongs with the public key used when deploying the MVE.
+
+`ssh -i <private-key-file> mveadmin@<public ip>`
+
+Configure interfaces:
+
+```
+interface GigabitEthernet2
+ no ip address
+ no shutdown
+ negotiation auto
+!
+interface GigabitEthernet2.100
+ encapsulation dot1Q 100
+ ip address 192.168.0.1 255.255.255.252
+!
+interface GigabitEthernet3
+ no ip address
+ no shutdown
+ negotiation auto
+!
+interface GigabitEthernet3.101
+ encapsulation dot1Q 101
+ ip address 192.168.0.5 255.255.255.252
+ ```
+ Use the Preferred A-end VLAN values set in the primary and secondary VXCs to configure the encapsulation on the subinterfaces. Use the lower address of the /30 subnets configured on the Private Peering.
+
+ The higher IP addresses of the Private Peering should now respond to ping:
+ ```
+ ping 192.168.0.2
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.0.2, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 1/1/1 ms
+```
+If ping does not work there likely is an ARP resolution issue. Run `show arp` and `debug arp` and check the ARP table of the Private Peering.
+
+Configure BGP:
+```
+router bgp 64000
+ bgp log-neighbor-changes
+ neighbor 192.168.0.2 remote-as 12076
+ neighbor 192.168.0.2 soft-reconfiguration inbound
+ neighbor 192.168.0.6 remote-as 12076
+ neighbor 192.168.0.6 soft-reconfiguration inbound
+ ```
+ Verify both neighbor show BGP state = Established:
+```
+sh ip bgp neighbor 192.168.0.2
+BGP neighbor is 192.168.0.2,  remote AS 12076, external link
+  BGP version 4, remote router ID 192.168.0.2
+  BGP state = Established, up for 1d21h
+  ...
+```
+
+The basic configuration of ExpressRoute to MVE is now complete.
+
+
+
+
